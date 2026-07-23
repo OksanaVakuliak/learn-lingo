@@ -1,0 +1,38 @@
+.button {
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition:
+    background-color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.accent {
+  padding: 16px 88px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text);
+  background-color: var(--accent);
+}
+
+.accent:hover:not(:disabled),
+.accent:focus-visible {
+  background-color: var(--accent-light);
+}
+
+.dark {
+  padding: 14px 39px;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-white);
+  background-color: var(--color-dark);
+}
+
+.dark:hover:not(:disabled),
+.dark:focus-visible {
+  opacity: 0.85;
+}

@@ -1,3 +1,5 @@
+@import './variables.css';
+
 *,
 *::before,
 *::after {
@@ -15,7 +17,9 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
