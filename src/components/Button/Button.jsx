@@ -7,7 +7,8 @@ function Button({
   children,
   ...props
 }) {
-  const classes = [styles.button, styles[variant], className]
+  const variantClass = styles[variant] ?? styles.accent;
+  const classes = [styles.button, variantClass, className]
     .filter(Boolean)
     .join(' ');
 
