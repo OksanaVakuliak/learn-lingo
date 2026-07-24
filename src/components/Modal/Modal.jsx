@@ -6,6 +6,7 @@ import styles from './Modal.module.css';
 function Modal({ title, description, onClose, children }) {
   const titleId = useId();
   const dialogRef = useRef(null);
+  const backdropPressed = useRef(false);
 
   useEffect(() => {
     const previouslyFocused = document.activeElement;
@@ -32,14 +33,22 @@ function Modal({ title, description, onClose, children }) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
+  const handleBackdropMouseDown = (event) => {
+    backdropPressed.current = event.target === event.currentTarget;
+  };
+
   const handleBackdropClick = (event) => {
-    if (event.target === event.currentTarget) {
+    if (backdropPressed.current && event.target === event.currentTarget) {
       onClose();
     }
   };
 
   return createPortal(
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
+    <div
+      className={styles.backdrop}
+      onMouseDown={handleBackdropMouseDown}
+      onClick={handleBackdropClick}
+    >
       <div
         ref={dialogRef}
         className={styles.modal}
