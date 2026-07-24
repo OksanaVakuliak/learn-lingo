@@ -3,12 +3,13 @@
 }
 
 .inner {
+  --container-padding: 128px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
   min-height: 48px;
-  padding-inline: calc(var(--container-padding) * 2);
 }
 
 .logo {
@@ -36,8 +37,8 @@
   transition: color 0.25s ease;
 }
 
-.link:hover,
-.link:focus-visible {
+.link:hover:not(.active),
+.link:focus-visible:not(.active) {
   color: var(--color-text-secondary);
 }
 
