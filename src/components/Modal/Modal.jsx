@@ -7,16 +7,23 @@ function Modal({ title, description, onClose, children }) {
   const titleId = useId();
   const dialogRef = useRef(null);
   const backdropPressed = useRef(false);
+  const triggerRef = useRef(document.activeElement);
 
   useEffect(() => {
-    const previouslyFocused = document.activeElement;
+    const previouslyFocused = triggerRef.current;
     const initialOverflow = document.body.style.overflow;
+    const root = document.getElementById('root');
 
     document.body.style.overflow = 'hidden';
-    dialogRef.current.focus();
+    root.inert = true;
+
+    if (!dialogRef.current.contains(document.activeElement)) {
+      dialogRef.current.focus();
+    }
 
     return () => {
       document.body.style.overflow = initialOverflow;
+      root.inert = false;
       previouslyFocused?.focus();
     };
   }, []);
