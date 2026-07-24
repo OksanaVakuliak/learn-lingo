@@ -23,10 +23,6 @@
   letter-spacing: -0.02em;
 }
 
-.logoIcon {
-  color: var(--accent);
-}
-
 .nav {
   display: flex;
   gap: 28px;
