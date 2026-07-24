@@ -25,14 +25,21 @@ function toAuthError(error) {
 }
 
 export async function register({ name, email, password }) {
-  try {
-    const { user } = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(user, { displayName: name });
+  let user;
 
-    return normalizeUser(user);
+  try {
+    ({ user } = await createUserWithEmailAndPassword(auth, email, password));
   } catch (error) {
     throw toAuthError(error);
   }
+
+  try {
+    await updateProfile(user, { displayName: name });
+  } catch (error) {
+    console.warn('Display name was not saved', error);
+  }
+
+  return { ...normalizeUser(user), name };
 }
 
 export async function login({ email, password }) {
