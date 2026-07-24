@@ -44,7 +44,12 @@ function Header() {
     <header className={styles.header}>
       <Container className={styles.inner}>
         <NavLink to="/" className={styles.logo}>
-          <Icon name="book-open" size={28} className={styles.logoIcon} />
+          <img
+            src={`${import.meta.env.BASE_URL}logo.svg`}
+            alt=""
+            width={28}
+            height={28}
+          />
           LearnLingo
         </NavLink>
 
