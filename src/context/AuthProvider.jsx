@@ -23,7 +23,9 @@ function AuthProvider({ children }) {
     setUser(await authService.login(credentials));
   }, []);
 
-  const logout = useCallback(() => authService.logout(), []);
+  const logout = useCallback(async () => {
+    await authService.logout();
+  }, []);
 
   const value = useMemo(
     () => ({ user, isLoading, register, login, logout }),
