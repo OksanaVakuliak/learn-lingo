@@ -49,6 +49,7 @@
 }
 
 .auth {
+  position: relative;
   display: flex;
   align-items: center;
   justify-self: end;
@@ -73,6 +74,16 @@
 
 .loginIcon {
   color: var(--accent);
+}
+
+.error {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  font-size: 14px;
+  line-height: 18px;
+  white-space: nowrap;
+  color: var(--color-error);
 }
 
 .userName {
