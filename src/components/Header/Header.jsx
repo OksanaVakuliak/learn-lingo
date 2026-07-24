@@ -14,7 +14,7 @@ const AUTH_MODALS = {
   login: {
     title: 'Log In',
     description:
-      'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.',
+      'Welcome back! Please enter your credentials to access your account and continue your search for a teacher.',
   },
   register: {
     title: 'Registration',
