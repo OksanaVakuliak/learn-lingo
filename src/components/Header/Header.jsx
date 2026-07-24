@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from '../Container/Container';
 import Icon from '../Icon/Icon';
@@ -9,13 +10,16 @@ const navLinkClass = ({ isActive }) =>
   isActive ? `${styles.link} ${styles.active}` : styles.link;
 
 function Header() {
-  const { user, logout } = useAuth();
+  const { user, isLoading, logout } = useAuth();
+  const [logoutError, setLogoutError] = useState('');
 
   const handleLogout = async () => {
+    setLogoutError('');
+
     try {
       await logout();
     } catch (error) {
-      console.warn(error.message);
+      setLogoutError(error.message);
     }
   };
 
@@ -50,22 +54,30 @@ function Header() {
         </nav>
 
         <div className={styles.auth}>
-          {user ? (
-            <>
-              <span className={styles.userName}>{user.name || user.email}</span>
-              <Button variant="dark" onClick={handleLogout}>
-                Log out
-              </Button>
-            </>
-          ) : (
-            <>
-              <button type="button" className={styles.loginButton}>
-                <Icon name="log-in" size={20} className={styles.loginIcon} />
-                Log in
-              </button>
-              <Button variant="dark">Registration</Button>
-            </>
-          )}
+          {!isLoading &&
+            (user ? (
+              <>
+                {logoutError && (
+                  <span className={styles.error} role="alert">
+                    {logoutError}
+                  </span>
+                )}
+                <span className={styles.userName}>
+                  {user.name || user.email}
+                </span>
+                <Button variant="dark" onClick={handleLogout}>
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <>
+                <button type="button" className={styles.loginButton}>
+                  <Icon name="log-in" size={20} className={styles.loginIcon} />
+                  Log in
+                </button>
+                <Button variant="dark">Registration</Button>
+              </>
+            ))}
         </div>
       </Container>
     </header>
