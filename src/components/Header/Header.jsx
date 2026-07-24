@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import Container from '../Container/Container';
 import Icon from '../Icon/Icon';
+import Button from '../Button/Button';
 import useAuth from '../../hooks/useAuth';
 import styles from './Header.module.css';
 
@@ -8,7 +9,15 @@ const navLinkClass = ({ isActive }) =>
   isActive ? `${styles.link} ${styles.active}` : styles.link;
 
 function Header() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.warn(error.message);
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -39,6 +48,25 @@ function Header() {
             )}
           </ul>
         </nav>
+
+        <div className={styles.auth}>
+          {user ? (
+            <>
+              <span className={styles.userName}>{user.name || user.email}</span>
+              <Button variant="dark" onClick={handleLogout}>
+                Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <button type="button" className={styles.loginButton}>
+                <Icon name="log-in" size={20} className={styles.loginIcon} />
+                Log in
+              </button>
+              <Button variant="dark">Registration</Button>
+            </>
+          )}
+        </div>
       </Container>
     </header>
   );
