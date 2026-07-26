@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from '../Container/Container';
 import Icon from '../Icon/Icon';
@@ -28,6 +28,7 @@ function Header() {
   const { user, isLoading, logout } = useAuth();
   const [logoutError, setLogoutError] = useState('');
   const [activeModal, setActiveModal] = useState(null);
+  const authRef = useRef(null);
 
   const closeModal = useCallback(() => setActiveModal(null), []);
 
@@ -76,7 +77,7 @@ function Header() {
           </ul>
         </nav>
 
-        <div className={styles.auth}>
+        <div className={styles.auth} ref={authRef} tabIndex={-1}>
           {!isLoading &&
             (user ? (
               <>
@@ -118,6 +119,7 @@ function Header() {
           title={AUTH_MODALS[activeModal].title}
           description={AUTH_MODALS[activeModal].description}
           onClose={closeModal}
+          returnFocusRef={authRef}
         >
           <AuthForm mode={activeModal} onSuccess={closeModal} />
         </Modal>

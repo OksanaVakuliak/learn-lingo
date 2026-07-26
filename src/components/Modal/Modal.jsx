@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import Icon from '../Icon/Icon';
 import styles from './Modal.module.css';
 
-function Modal({ title, description, onClose, children }) {
+function Modal({ title, description, onClose, returnFocusRef, children }) {
   const titleId = useId();
   const dialogRef = useRef(null);
   const backdropPressed = useRef(false);
@@ -11,6 +11,7 @@ function Modal({ title, description, onClose, children }) {
 
   useEffect(() => {
     const previouslyFocused = triggerRef.current;
+    const fallbackFocused = returnFocusRef?.current;
     const initialOverflow = document.body.style.overflow;
     const root = document.getElementById('root');
 
@@ -24,9 +25,14 @@ function Modal({ title, description, onClose, children }) {
     return () => {
       document.body.style.overflow = initialOverflow;
       root.inert = false;
-      previouslyFocused?.focus();
+
+      const target = previouslyFocused?.isConnected
+        ? previouslyFocused
+        : fallbackFocused;
+
+      target?.focus();
     };
-  }, []);
+  }, [returnFocusRef]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
