@@ -32,12 +32,16 @@ function Header() {
   const authRef = useRef(null);
   const toggleRef = useRef(null);
   const menuRef = useRef(null);
+  const modalReturnRef = useRef(null);
 
   const closeModal = useCallback(() => setActiveModal(null), []);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 768px)');
+    const breakpoint = getComputedStyle(document.documentElement)
+      .getPropertyValue('--menu-breakpoint')
+      .trim();
+    const desktop = window.matchMedia(`(min-width: ${breakpoint})`);
     const handleChange = (event) => event.matches && closeMenu();
 
     desktop.addEventListener('change', handleChange);
@@ -51,7 +55,10 @@ function Header() {
     }
 
     const initialOverflow = document.body.style.overflow;
+    const main = document.querySelector('main');
+
     document.body.style.overflow = 'hidden';
+    main.inert = true;
 
     const focusFrame = requestAnimationFrame(() =>
       menuRef.current?.querySelector('a, button')?.focus()
@@ -69,6 +76,7 @@ function Header() {
     return () => {
       cancelAnimationFrame(focusFrame);
       document.body.style.overflow = initialOverflow;
+      main.inert = false;
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMenuOpen, closeMenu]);
@@ -85,6 +93,7 @@ function Header() {
   };
 
   const openModal = (mode) => {
+    modalReturnRef.current = isMenuOpen ? toggleRef.current : authRef.current;
     closeMenu();
     setActiveModal(mode);
   };
@@ -185,7 +194,7 @@ function Header() {
           title={AUTH_MODALS[activeModal].title}
           description={AUTH_MODALS[activeModal].description}
           onClose={closeModal}
-          returnFocusRef={authRef}
+          returnFocusRef={modalReturnRef}
         >
           <AuthForm mode={activeModal} onSuccess={closeModal} />
         </Modal>
