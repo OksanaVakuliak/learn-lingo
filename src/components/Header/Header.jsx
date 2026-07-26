@@ -4,6 +4,7 @@ import Container from '../Container/Container';
 import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
+import AuthForm from '../AuthForm/AuthForm';
 import useAuth from '../../hooks/useAuth';
 import styles from './Header.module.css';
 
@@ -117,7 +118,9 @@ function Header() {
           title={AUTH_MODALS[activeModal].title}
           description={AUTH_MODALS[activeModal].description}
           onClose={closeModal}
-        />
+        >
+          <AuthForm mode={activeModal} onSuccess={closeModal} />
+        </Modal>
       )}
     </header>
   );
