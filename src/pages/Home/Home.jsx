@@ -56,16 +56,7 @@ function Home() {
         <Container>
           <div className={styles.stats}>
             <svg className={styles.frame} aria-hidden="true" focusable="false">
-              <rect
-                width="100%"
-                height="100%"
-                rx="30"
-                ry="30"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeDasharray="15 15"
-              />
+              <rect className={styles.frameOutline} width="100%" height="100%" />
             </svg>
 
             <ul className={styles.list}>
