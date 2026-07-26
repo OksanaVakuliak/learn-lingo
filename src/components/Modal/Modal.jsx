@@ -28,7 +28,7 @@ function Modal({ title, description, onClose, returnFocusRef, children }) {
 
       const target = previouslyFocused?.isConnected
         ? previouslyFocused
-        : fallbackFocused;
+        : fallbackFocused?.querySelector('button, [href]');
 
       target?.focus();
     };

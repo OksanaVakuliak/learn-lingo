@@ -52,10 +52,6 @@
   gap: 16px;
 }
 
-.auth:focus {
-  outline: none;
-}
-
 .loginButton {
   display: flex;
   align-items: center;

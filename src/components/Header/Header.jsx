@@ -77,7 +77,7 @@ function Header() {
           </ul>
         </nav>
 
-        <div className={styles.auth} ref={authRef} tabIndex={-1}>
+        <div className={styles.auth} ref={authRef}>
           {!isLoading &&
             (user ? (
               <>
