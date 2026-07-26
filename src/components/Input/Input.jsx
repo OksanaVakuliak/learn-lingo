@@ -22,6 +22,7 @@ function Input({ type = 'text', error, className, ...props }) {
         <input
           type={isPassword && isPasswordVisible ? 'text' : type}
           className={classes}
+          aria-label={props.placeholder}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}
           {...props}
@@ -40,7 +41,7 @@ function Input({ type = 'text', error, className, ...props }) {
       </div>
 
       {error && (
-        <p id={errorId} className={styles.error}>
+        <p id={errorId} className={styles.error} role="alert">
           {error}
         </p>
       )}
