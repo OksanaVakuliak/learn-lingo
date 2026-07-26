@@ -13,7 +13,7 @@ const STATS = [
 function Home() {
   return (
     <>
-      <section className={styles.hero}>
+      <section>
         <Container className={styles.heroGrid}>
           <div className={styles.intro}>
             <h1 className={styles.title}>
