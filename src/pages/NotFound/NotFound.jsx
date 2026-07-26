@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
+import Highlight from '../../components/Highlight/Highlight';
 import styles from './NotFound.module.css';
 
 function NotFound() {
@@ -11,8 +12,7 @@ function NotFound() {
           <p className={styles.code}>404</p>
 
           <h1 className={styles.title}>
-            This page took an <em className={styles.highlight}>unplanned</em>{' '}
-            vacation
+            This page took an <Highlight>unplanned</Highlight> vacation
           </h1>
 
           <p className={styles.description}>

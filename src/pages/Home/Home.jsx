@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
+import Highlight from '../../components/Highlight/Highlight';
 import styles from './Home.module.css';
 
 const STATS = [
@@ -18,7 +19,7 @@ function Home() {
           <div className={styles.intro}>
             <h1 className={styles.title}>
               Unlock your potential with the best{' '}
-              <em className={styles.highlight}>language</em> tutors
+              <Highlight>language</Highlight> tutors
             </h1>
 
             <p className={styles.description}>
