@@ -36,7 +36,7 @@ function Home() {
           <div className={styles.illustration}>
             <img
               className={styles.sticker}
-              src={`${import.meta.env.BASE_URL}hero-sticker.png`}
+              src={`${import.meta.env.BASE_URL}hero-sticker.webp`}
               alt=""
               width={339}
               height={339}
