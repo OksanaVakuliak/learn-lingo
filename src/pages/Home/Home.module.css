@@ -41,19 +41,19 @@
 
 .sticker {
   position: absolute;
-  top: 40px;
+  top: 10%;
   left: 50%;
   width: 200px;
-  height: 200px;
+  height: auto;
   transform: translateX(-50%);
 }
 
 .mac {
   position: absolute;
-  top: 200px;
+  bottom: 0;
   left: 50%;
   width: 231px;
-  height: 104px;
+  height: auto;
   transform: translateX(-50%);
 }
 
@@ -140,24 +140,20 @@
   }
 
   .illustration {
-    height: 420px;
+    height: clamp(320px, 38vw, 480px);
   }
 
   .sticker {
-    top: 60px;
-    width: 270px;
-    height: 270px;
+    width: clamp(200px, 26vw, 320px);
   }
 
   .mac {
-    top: 280px;
-    width: 312px;
-    height: 140px;
+    width: clamp(231px, 30vw, 370px);
   }
 
   .list {
     grid-template-columns: repeat(4, auto);
-    gap: 40px;
+    gap: clamp(24px, 5vw, 64px);
     padding: 28px 24px;
   }
 
@@ -174,7 +170,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .heroGrid {
     grid-template-columns: minmax(0, 720fr) minmax(0, 568fr);
   }
@@ -203,18 +199,16 @@
   }
 
   .sticker {
-    top: 80px;
-    left: 114px;
-    width: 339px;
-    height: 339px;
+    top: auto;
+    bottom: 20.94%;
+    left: 20.07%;
+    width: 59.68%;
     transform: none;
   }
 
   .mac {
-    top: 354px;
-    left: 88px;
-    width: 391px;
-    height: 176px;
+    left: 15.49%;
+    width: 68.84%;
     transform: none;
   }
 
