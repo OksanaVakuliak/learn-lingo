@@ -1,6 +1,6 @@
 .heroGrid {
   display: grid;
-  grid-template-columns: 720px 568px;
+  grid-template-columns: minmax(0, 720fr) minmax(0, 568fr);
   gap: 24px;
 }
 
