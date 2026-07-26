@@ -33,7 +33,20 @@
   --radius-lg: 30px;
 
   --container-max: 1440px;
-  --container-padding: 64px;
+  --container-padding: 20px;
+  --menu-breakpoint: 768px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --container-padding: 64px;
+  }
 }
 
 :root[data-theme='green'] {

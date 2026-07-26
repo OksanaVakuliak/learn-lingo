@@ -7,8 +7,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 530px;
-  padding: 64px;
+  min-height: 400px;
+  padding: 40px 20px;
   text-align: center;
   background-color: var(--color-bg-light);
   border-radius: var(--radius-lg);
@@ -16,25 +16,25 @@
 
 .code {
   font-weight: 500;
-  font-size: 96px;
-  line-height: 104px;
-  letter-spacing: -1.92px;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -1.28px;
   color: var(--accent);
 }
 
 .title {
   max-width: 620px;
-  margin-top: 16px;
-  text-wrap: balance;
+  margin-top: 12px;
   font-weight: 500;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: -0.96px;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.56px;
+  text-wrap: balance;
 }
 
 .description {
   max-width: 471px;
-  margin-top: 32px;
+  margin-top: 20px;
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.32px;
@@ -42,5 +42,60 @@
 }
 
 .cta {
-  margin-top: 64px;
+  margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+  .panel {
+    min-height: 460px;
+    padding: 56px 40px;
+  }
+
+  .code {
+    font-size: 80px;
+    line-height: 88px;
+    letter-spacing: -1.6px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -0.76px;
+  }
+
+  .description {
+    margin-top: 28px;
+  }
+
+  .cta {
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .panel {
+    min-height: 530px;
+    padding: 64px;
+  }
+
+  .code {
+    font-size: 96px;
+    line-height: 104px;
+    letter-spacing: -1.92px;
+  }
+
+  .title {
+    margin-top: 16px;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.96px;
+  }
+
+  .description {
+    margin-top: 32px;
+  }
+
+  .cta {
+    margin-top: 64px;
+  }
 }
