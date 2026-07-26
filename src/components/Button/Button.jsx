@@ -1,6 +1,7 @@
 import styles from './Button.module.css';
 
 function Button({
+  as: Component = 'button',
   variant = 'accent',
   type = 'button',
   className,
@@ -13,9 +14,13 @@ function Button({
     .join(' ');
 
   return (
-    <button type={type} className={classes} {...props}>
+    <Component
+      type={Component === 'button' ? type : undefined}
+      className={classes}
+      {...props}
+    >
       {children}
-    </button>
+    </Component>
   );
 }
 
