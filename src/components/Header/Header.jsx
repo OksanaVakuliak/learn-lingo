@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from '../Container/Container';
 import Icon from '../Icon/Icon';
@@ -28,18 +28,65 @@ function Header() {
   const { user, isLoading, logout } = useAuth();
   const [logoutError, setLogoutError] = useState('');
   const [activeModal, setActiveModal] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const authRef = useRef(null);
+  const toggleRef = useRef(null);
+  const menuRef = useRef(null);
 
   const closeModal = useCallback(() => setActiveModal(null), []);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)');
+    const handleChange = (event) => event.matches && closeMenu();
+
+    desktop.addEventListener('change', handleChange);
+
+    return () => desktop.removeEventListener('change', handleChange);
+  }, [closeMenu]);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const initialOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const focusFrame = requestAnimationFrame(() =>
+      menuRef.current?.querySelector('a, button')?.focus()
+    );
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        toggleRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      cancelAnimationFrame(focusFrame);
+      document.body.style.overflow = initialOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen, closeMenu]);
 
   const handleLogout = async () => {
     setLogoutError('');
+    closeMenu();
 
     try {
       await logout();
     } catch (error) {
       setLogoutError(error.message);
     }
+  };
+
+  const openModal = (mode) => {
+    closeMenu();
+    setActiveModal(mode);
   };
 
   return (
@@ -55,62 +102,81 @@ function Header() {
           LearnLingo
         </NavLink>
 
-        <nav>
-          <ul className={styles.nav}>
-            <li>
-              <NavLink to="/" className={navLinkClass} end>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/teachers" className={navLinkClass}>
-                Teachers
-              </NavLink>
-            </li>
-            {user && (
+        <button
+          ref={toggleRef}
+          type="button"
+          className={styles.toggle}
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-expanded={isMenuOpen}
+          aria-controls="header-menu"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          <Icon name={isMenuOpen ? 'close' : 'menu'} size={28} />
+        </button>
+
+        {isMenuOpen && (
+          <div className={styles.backdrop} onClick={closeMenu} />
+        )}
+
+        <div
+          id="header-menu"
+          ref={menuRef}
+          className={isMenuOpen ? `${styles.menu} ${styles.open}` : styles.menu}
+        >
+          <nav onClick={closeMenu}>
+            <ul className={styles.nav}>
               <li>
-                <NavLink to="/favorites" className={navLinkClass}>
-                  Favorites
+                <NavLink to="/" className={navLinkClass} end>
+                  Home
                 </NavLink>
               </li>
-            )}
-          </ul>
-        </nav>
+              <li>
+                <NavLink to="/teachers" className={navLinkClass}>
+                  Teachers
+                </NavLink>
+              </li>
+              {user && (
+                <li>
+                  <NavLink to="/favorites" className={navLinkClass}>
+                    Favorites
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </nav>
 
-        <div className={styles.auth} ref={authRef}>
-          {!isLoading &&
-            (user ? (
-              <>
-                {logoutError && (
-                  <span className={styles.error} role="alert">
-                    {logoutError}
+          <div className={styles.auth} ref={authRef}>
+            {!isLoading &&
+              (user ? (
+                <>
+                  {logoutError && (
+                    <span className={styles.error} role="alert">
+                      {logoutError}
+                    </span>
+                  )}
+                  <span className={styles.userName}>
+                    {user.name || user.email}
                   </span>
-                )}
-                <span className={styles.userName}>
-                  {user.name || user.email}
-                </span>
-                <Button variant="dark" onClick={handleLogout}>
-                  Log out
-                </Button>
-              </>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  className={styles.loginButton}
-                  onClick={() => setActiveModal('login')}
-                >
-                  <Icon name="log-in" size={20} className={styles.loginIcon} />
-                  Log in
-                </button>
-                <Button
-                  variant="dark"
-                  onClick={() => setActiveModal('register')}
-                >
-                  Registration
-                </Button>
-              </>
-            ))}
+                  <Button variant="dark" onClick={handleLogout}>
+                    Log out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className={styles.loginButton}
+                    onClick={() => openModal('login')}
+                  >
+                    <Icon name="log-in" size={20} className={styles.loginIcon} />
+                    Log in
+                  </button>
+                  <Button variant="dark" onClick={() => openModal('register')}>
+                    Registration
+                  </Button>
+                </>
+              ))}
+          </div>
         </div>
       </Container>
 
