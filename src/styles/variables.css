@@ -10,6 +10,7 @@
   --color-bg-light: #f8f8f8;
   --color-dark: #121417;
   --color-error: #d32f2f;
+  --color-border: rgba(18, 20, 23, 0.1);
   --color-backdrop: rgba(18, 20, 23, 0.6);
 
   --color-yellow: #f4c550;
