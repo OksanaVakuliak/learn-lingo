@@ -54,14 +54,29 @@ function Home() {
 
       <section className={styles.benefits} aria-label="LearnLingo in numbers">
         <Container>
-          <ul className={styles.stats}>
-            {STATS.map(({ value, label }) => (
-              <li key={label} className={styles.stat}>
-                <span className={styles.statValue}>{value}</span>
-                <span className={styles.statLabel}>{label}</span>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.stats}>
+            <svg className={styles.frame} aria-hidden="true" focusable="false">
+              <rect
+                width="100%"
+                height="100%"
+                rx="30"
+                ry="30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeDasharray="15 15"
+              />
+            </svg>
+
+            <ul className={styles.list}>
+              {STATS.map(({ value, label }) => (
+                <li key={label} className={styles.stat}>
+                  <span className={styles.statValue}>{value}</span>
+                  <span className={styles.statLabel}>{label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
     </>
