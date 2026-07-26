@@ -72,7 +72,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .panel {
     min-height: 530px;
     padding: 64px;

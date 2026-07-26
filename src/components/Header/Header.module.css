@@ -195,7 +195,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .inner {
     --container-padding: 128px;
   }
