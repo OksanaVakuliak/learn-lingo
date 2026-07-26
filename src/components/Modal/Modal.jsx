@@ -3,6 +3,28 @@ import { createPortal } from 'react-dom';
 import Icon from '../Icon/Icon';
 import styles from './Modal.module.css';
 
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]';
+
+function isReachable(element) {
+  return Boolean(
+    element?.isConnected &&
+      element.checkVisibility({ visibilityProperty: true }) &&
+      element.matches(FOCUSABLE)
+  );
+}
+
+function findReturnTarget(trigger, fallback) {
+  if (isReachable(trigger)) {
+    return trigger;
+  }
+
+  if (!fallback) {
+    return null;
+  }
+
+  return [fallback, ...fallback.querySelectorAll(FOCUSABLE)].find(isReachable);
+}
+
 function Modal({ title, description, onClose, returnFocusRef, children }) {
   const titleId = useId();
   const dialogRef = useRef(null);
@@ -26,11 +48,7 @@ function Modal({ title, description, onClose, returnFocusRef, children }) {
       document.body.style.overflow = initialOverflow;
       root.inert = false;
 
-      const target = previouslyFocused?.isConnected
-        ? previouslyFocused
-        : fallbackFocused?.querySelector('button, [href]');
-
-      target?.focus();
+      findReturnTarget(previouslyFocused, fallbackFocused)?.focus();
     };
   }, [returnFocusRef]);
 
