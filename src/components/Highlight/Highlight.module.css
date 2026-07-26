@@ -1,0 +1,9 @@
+.highlight {
+  display: inline-block;
+  padding: 0 8px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 40px;
+  background-color: var(--accent-light);
+  border-radius: var(--radius-sm);
+}

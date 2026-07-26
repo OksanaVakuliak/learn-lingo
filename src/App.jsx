@@ -1,9 +1,10 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Home from './pages/Home/Home';
 import Teachers from './pages/Teachers/Teachers';
 import Favorites from './pages/Favorites/Favorites';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
