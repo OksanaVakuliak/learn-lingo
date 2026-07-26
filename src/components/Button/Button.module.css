@@ -12,9 +12,9 @@
 }
 
 .accent {
-  padding: 16px 88px;
-  font-size: 18px;
-  line-height: 28px;
+  padding: 14px 40px;
+  font-size: 16px;
+  line-height: 24px;
   color: var(--color-text);
   background-color: var(--accent);
 }
@@ -35,4 +35,18 @@
 .dark:hover:not(:disabled),
 .dark:focus-visible {
   opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+  .accent {
+    padding: 16px 64px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .accent {
+    padding: 16px 88px;
+  }
 }
