@@ -9,12 +9,12 @@ import styles from './AuthForm.module.css';
 
 const MODES = {
   login: {
-    schema: loginSchema,
+    resolver: yupResolver(loginSchema),
     submitLabel: 'Log In',
     pendingLabel: 'Signing in…',
   },
   register: {
-    schema: registrationSchema,
+    resolver: yupResolver(registrationSchema),
     submitLabel: 'Sign Up',
     pendingLabel: 'Signing up…',
   },
@@ -24,14 +24,14 @@ function AuthForm({ mode, onSuccess }) {
   const { login, register: registerUser } = useAuth();
   const [submitError, setSubmitError] = useState('');
 
-  const { schema, submitLabel, pendingLabel } = MODES[mode];
+  const { resolver, submitLabel, pendingLabel } = MODES[mode];
   const isRegistration = mode === 'register';
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver });
 
   const onSubmit = async (credentials) => {
     setSubmitError('');
