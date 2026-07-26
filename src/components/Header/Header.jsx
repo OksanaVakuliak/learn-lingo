@@ -58,7 +58,10 @@ function Header() {
     const main = document.querySelector('main');
 
     document.body.style.overflow = 'hidden';
-    main.inert = true;
+
+    if (main) {
+      main.inert = true;
+    }
 
     const focusFrame = requestAnimationFrame(() =>
       menuRef.current?.querySelector('a, button')?.focus()
@@ -76,7 +79,11 @@ function Header() {
     return () => {
       cancelAnimationFrame(focusFrame);
       document.body.style.overflow = initialOverflow;
-      main.inert = false;
+
+      if (main) {
+        main.inert = false;
+      }
+
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMenuOpen, closeMenu]);
