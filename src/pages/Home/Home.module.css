@@ -1,29 +1,26 @@
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 720fr) minmax(0, 568fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 .intro {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 64px;
+  padding: 32px 20px;
   background-color: var(--color-bg-light);
   border-radius: var(--radius-lg);
 }
 
 .title {
-  max-width: 548px;
   font-weight: 500;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: -0.96px;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.56px;
 }
 
 .description {
-  max-width: 471px;
-  margin-top: 32px;
+  margin-top: 20px;
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.32px;
@@ -31,12 +28,12 @@
 
 .cta {
   align-self: start;
-  margin-top: 64px;
+  margin-top: 32px;
 }
 
 .illustration {
   position: relative;
-  height: 530px;
+  height: 320px;
   overflow: hidden;
   background-color: var(--accent-light);
   border-radius: var(--radius-lg);
@@ -44,18 +41,24 @@
 
 .sticker {
   position: absolute;
-  top: 80px;
-  left: 114px;
+  top: 40px;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translateX(-50%);
 }
 
 .mac {
   position: absolute;
-  top: 354px;
-  left: 88px;
+  top: 200px;
+  left: 50%;
+  width: 231px;
+  height: 104px;
+  transform: translateX(-50%);
 }
 
 .benefits {
-  padding: 24px 0 32px;
+  padding: 16px 0 32px;
 }
 
 .stats {
@@ -83,31 +86,158 @@
 }
 
 .list {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   justify-content: center;
-  gap: 100px;
-  min-height: 116px;
+  gap: 20px 24px;
+  padding: 24px 20px;
 }
 
 .stat {
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .statValue {
   font-weight: 500;
-  font-size: 28px;
-  line-height: 32px;
-  letter-spacing: -0.56px;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
   white-space: nowrap;
 }
 
 .statLabel {
   max-width: 80px;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.28px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.24px;
   color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .heroGrid {
+    gap: 24px;
+  }
+
+  .intro {
+    padding: 48px 40px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -0.76px;
+  }
+
+  .description {
+    max-width: 471px;
+    margin-top: 32px;
+  }
+
+  .cta {
+    margin-top: 48px;
+  }
+
+  .illustration {
+    height: 420px;
+  }
+
+  .sticker {
+    top: 60px;
+    width: 270px;
+    height: 270px;
+  }
+
+  .mac {
+    top: 280px;
+    width: 312px;
+    height: 140px;
+  }
+
+  .list {
+    grid-template-columns: repeat(4, auto);
+    gap: 40px;
+    padding: 28px 24px;
+  }
+
+  .statValue {
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.48px;
+  }
+
+  .statLabel {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 720fr) minmax(0, 568fr);
+  }
+
+  .intro {
+    padding: 0 64px;
+  }
+
+  .title {
+    max-width: 548px;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.96px;
+  }
+
+  .description {
+    margin-top: 32px;
+  }
+
+  .cta {
+    margin-top: 64px;
+  }
+
+  .illustration {
+    height: 530px;
+  }
+
+  .sticker {
+    top: 80px;
+    left: 114px;
+    width: 339px;
+    height: 339px;
+    transform: none;
+  }
+
+  .mac {
+    top: 354px;
+    left: 88px;
+    width: 391px;
+    height: 176px;
+    transform: none;
+  }
+
+  .benefits {
+    padding: 24px 0 32px;
+  }
+
+  .list {
+    align-items: center;
+    gap: 100px;
+    min-height: 116px;
+    padding: 0;
+  }
+
+  .stat {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .statValue {
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: -0.56px;
+  }
 }
