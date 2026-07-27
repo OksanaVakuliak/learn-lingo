@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
@@ -10,13 +10,14 @@ function Teachers() {
   const [nextKey, setNextKey] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    let active = true;
+    isMounted.current = true;
 
     getTeachersPage()
       .then((page) => {
-        if (!active) {
+        if (!isMounted.current) {
           return;
         }
 
@@ -24,18 +25,18 @@ function Teachers() {
         setNextKey(page.nextKey);
       })
       .catch((loadError) => {
-        if (active) {
+        if (isMounted.current) {
           setError(loadError);
         }
       })
       .finally(() => {
-        if (active) {
+        if (isMounted.current) {
           setIsLoading(false);
         }
       });
 
     return () => {
-      active = false;
+      isMounted.current = false;
     };
   }, []);
 
@@ -45,11 +46,23 @@ function Teachers() {
 
     getTeachersPage(nextKey)
       .then((page) => {
+        if (!isMounted.current) {
+          return;
+        }
+
         setTeachers((loaded) => [...loaded, ...page.teachers]);
         setNextKey(page.nextKey);
       })
-      .catch(setError)
-      .finally(() => setIsLoading(false));
+      .catch((loadError) => {
+        if (isMounted.current) {
+          setError(loadError);
+        }
+      })
+      .finally(() => {
+        if (isMounted.current) {
+          setIsLoading(false);
+        }
+      });
   };
 
   return (
@@ -68,7 +81,13 @@ function Teachers() {
             </ul>
           )}
 
-          {isLoading && <p className={styles.status}>Loading teachers…</p>}
+          {isLoading && (
+            <p className={styles.status} role="status">
+              {teachers.length === 0
+                ? 'Loading teachers…'
+                : 'Loading more teachers…'}
+            </p>
+          )}
 
           {error && (
             <div className={styles.error} role="alert">
@@ -83,8 +102,12 @@ function Teachers() {
             <p className={styles.status}>No teachers to show yet.</p>
           )}
 
-          {!isLoading && !error && nextKey && (
-            <Button onClick={handleLoadMore} className={styles.action}>
+          {!error && nextKey && (
+            <Button
+              onClick={handleLoadMore}
+              disabled={isLoading}
+              className={styles.action}
+            >
               Load more
             </Button>
           )}

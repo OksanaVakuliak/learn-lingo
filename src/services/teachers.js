@@ -47,7 +47,7 @@ export async function getTeachers() {
 export async function getTeachersPage(startKey) {
   const constraints = [orderByKey(), limitToFirst(TEACHERS_PAGE_SIZE + 1)];
 
-  if (startKey) {
+  if (startKey != null) {
     constraints.push(startAt(startKey));
   }
 
