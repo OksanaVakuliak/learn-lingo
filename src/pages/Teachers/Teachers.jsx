@@ -14,11 +14,12 @@ function Teachers() {
   const isMounted = useRef(true);
 
   useEffect(() => {
+    let active = true;
     isMounted.current = true;
 
     getTeachersPage()
       .then((page) => {
-        if (!isMounted.current) {
+        if (!active) {
           return;
         }
 
@@ -26,17 +27,18 @@ function Teachers() {
         setNextKey(page.nextKey);
       })
       .catch((loadError) => {
-        if (isMounted.current) {
+        if (active) {
           setError(loadError);
         }
       })
       .finally(() => {
-        if (isMounted.current) {
+        if (active) {
           setIsLoading(false);
         }
       });
 
     return () => {
+      active = false;
       isMounted.current = false;
     };
   }, []);
