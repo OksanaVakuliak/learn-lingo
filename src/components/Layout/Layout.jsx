@@ -9,7 +9,7 @@ function Layout() {
     <>
       <Header />
       <main>
-        <ErrorBoundary key={location.pathname}>
+        <ErrorBoundary resetKey={location.key}>
           <Outlet />
         </ErrorBoundary>
       </main>
