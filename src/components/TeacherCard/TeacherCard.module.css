@@ -9,9 +9,13 @@
 }
 
 .favorite {
+  --favorite-inset: 16px;
+  --favorite-padding: 9px;
+
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: calc(var(--favorite-inset) - var(--favorite-padding));
+  right: calc(var(--favorite-inset) - var(--favorite-padding));
+  padding: var(--favorite-padding);
   color: var(--color-text);
   transition: color 0.25s ease;
 }
@@ -155,8 +159,7 @@
   }
 
   .favorite {
-    top: 24px;
-    right: 24px;
+    --favorite-inset: 24px;
   }
 
   .header {
@@ -177,7 +180,12 @@
     padding-right: 90px;
   }
 
+  .identity {
+    min-width: 0;
+  }
+
   .stats {
+    flex-shrink: 0;
     flex-wrap: nowrap;
     margin-top: 0;
   }
