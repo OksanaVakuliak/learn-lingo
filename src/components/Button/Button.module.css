@@ -12,7 +12,7 @@
 }
 
 .accent {
-  padding: 14px 40px;
+  padding: 14px var(--button-padding-x, 40px);
   font-size: 16px;
   line-height: 24px;
   color: var(--color-text);
@@ -39,7 +39,7 @@
 
 @media (min-width: 768px) {
   .accent {
-    padding: 16px 64px;
+    padding: 16px var(--button-padding-x, 64px);
     font-size: 18px;
     line-height: 28px;
   }
@@ -47,6 +47,6 @@
 
 @media (min-width: 1280px) {
   .accent {
-    padding: 16px 88px;
+    padding: 16px var(--button-padding-x, 88px);
   }
 }

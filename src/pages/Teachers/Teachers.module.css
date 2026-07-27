@@ -34,6 +34,8 @@
 }
 
 .action {
+  --button-padding-x: 48px;
+
   display: block;
   margin: 24px auto 0;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
+import Loader from '../../components/Loader/Loader';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
 import { getTeachersPage } from '../../services/teachers';
 import styles from './Teachers.module.css';
@@ -82,11 +83,14 @@ function Teachers() {
           )}
 
           {isLoading && (
-            <p className={styles.status} role="status">
-              {teachers.length === 0
-                ? 'Loading teachers…'
-                : 'Loading more teachers…'}
-            </p>
+            <Loader
+              inline={teachers.length > 0}
+              label={
+                teachers.length === 0
+                  ? 'Loading teachers'
+                  : 'Loading more teachers'
+              }
+            />
           )}
 
           {error && (
