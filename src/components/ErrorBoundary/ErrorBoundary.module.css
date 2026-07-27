@@ -38,6 +38,27 @@
 
 @media (min-width: 768px) {
   .panel {
+    min-height: 460px;
+    padding: 56px 40px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -0.76px;
+  }
+
+  .description {
+    margin-top: 28px;
+  }
+
+  .cta {
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .panel {
     min-height: 530px;
     padding: 64px;
   }
