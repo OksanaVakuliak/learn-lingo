@@ -10,6 +10,7 @@
   --color-bg-light: #f8f8f8;
   --color-dark: #121417;
   --color-error: #d32f2f;
+  --color-success: #38cd3e;
   --color-border: rgba(18, 20, 23, 0.1);
   --color-backdrop: rgba(18, 20, 23, 0.6);
 
@@ -30,7 +31,9 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-input: 14px;
+  --radius-card: 24px;
   --radius-lg: 30px;
+  --radius-pill: 35px;
 
   --container-max: 1440px;
   --container-padding: 20px;
