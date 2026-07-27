@@ -4,7 +4,7 @@ import { database } from './firebase';
 const TEACHERS_PATH = 'teachers';
 
 function normalizeTeacher(snapshot) {
-  return { id: snapshot.key, ...snapshot.val() };
+  return { ...snapshot.val(), id: snapshot.key };
 }
 
 export async function getTeachers() {
