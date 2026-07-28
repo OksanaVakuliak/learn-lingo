@@ -1,17 +1,35 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import AuthForm from '../../components/AuthForm/AuthForm';
 import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import Loader from '../../components/Loader/Loader';
+import Modal from '../../components/Modal/Modal';
 import TeacherCard from '../../components/TeacherCard/TeacherCard';
+import useAuth from '../../hooks/useAuth';
+import useFavorites from '../../hooks/useFavorites';
 import { getTeachersPage } from '../../services/teachers';
 import styles from './Teachers.module.css';
 
 function Teachers() {
+  const { user } = useAuth();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [teachers, setTeachers] = useState([]);
   const [nextKey, setNextKey] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoginRequired, setIsLoginRequired] = useState(false);
   const isMounted = useRef(true);
+
+  const closeLoginPrompt = useCallback(() => setIsLoginRequired(false), []);
+
+  const handleToggleFavorite = (teacherId) => {
+    if (!user) {
+      setIsLoginRequired(true);
+      return;
+    }
+
+    toggleFavorite(teacherId);
+  };
 
   useEffect(() => {
     let active = true;
@@ -78,7 +96,11 @@ function Teachers() {
             <ul className={styles.list}>
               {teachers.map((teacher) => (
                 <li key={teacher.id}>
-                  <TeacherCard teacher={teacher} />
+                  <TeacherCard
+                    teacher={teacher}
+                    isFavorite={isFavorite(teacher.id)}
+                    onToggleFavorite={() => handleToggleFavorite(teacher.id)}
+                  />
                 </li>
               ))}
             </ul>
@@ -119,6 +141,16 @@ function Teachers() {
           )}
         </div>
       </Container>
+
+      {isLoginRequired && (
+        <Modal
+          title="Log In"
+          description="Adding teachers to favorites is available to logged-in users only. Log in to keep your picks and find them on the Favorites page."
+          onClose={closeLoginPrompt}
+        >
+          <AuthForm mode="login" onSuccess={closeLoginPrompt} />
+        </Modal>
+      )}
     </section>
   );
 }

@@ -38,7 +38,11 @@ function TeacherCard({
         type="button"
         className={styles.favorite}
         aria-pressed={isFavorite}
-        aria-label={`Add ${fullName} to favorites`}
+        aria-label={
+          isFavorite
+            ? `Remove ${fullName} from favorites`
+            : `Add ${fullName} to favorites`
+        }
         onClick={onToggleFavorite}
       >
         <Icon name={isFavorite ? 'heart-filled' : 'heart'} size={26} />
