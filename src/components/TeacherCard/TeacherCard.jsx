@@ -22,11 +22,12 @@ function TeacherCard({
     lesson_info,
     conditions,
     experience,
-    reviews = [],
+    reviews,
   } = teacher;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const detailsId = useId();
+  const bookingId = useId();
 
   const fullName = `${name} ${surname}`;
   const highlightedLevel = activeLevel ?? levels[0];
@@ -97,7 +98,7 @@ function TeacherCard({
           type="button"
           className={styles.readMore}
           aria-expanded={isExpanded}
-          aria-controls={detailsId}
+          aria-controls={`${detailsId} ${bookingId}`}
           onClick={() => setIsExpanded((expanded) => !expanded)}
         >
           {isExpanded ? 'Read less' : 'Read more'}
@@ -135,7 +136,7 @@ function TeacherCard({
                               className={styles.star}
                               label="Rating"
                             />
-                            {reviewer_rating}
+                            {reviewer_rating.toFixed(1)}
                           </p>
                         </div>
                       </div>
@@ -164,7 +165,11 @@ function TeacherCard({
           ))}
         </ul>
 
-        <div className={styles.expandable} data-expanded={isExpanded}>
+        <div
+          id={bookingId}
+          className={styles.expandable}
+          data-expanded={isExpanded}
+        >
           <div className={styles.booking}>
             <Button className={styles.book} onClick={onBookTrial}>
               Book trial lesson
