@@ -1,3 +1,5 @@
+import { useId, useState } from 'react';
+import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import styles from './TeacherCard.module.css';
 
@@ -6,7 +8,7 @@ function TeacherCard({
   isFavorite = false,
   activeLevel,
   onToggleFavorite,
-  onReadMore,
+  onBookTrial,
 }) {
   const {
     name,
@@ -19,7 +21,13 @@ function TeacherCard({
     avatar_url,
     lesson_info,
     conditions,
+    experience,
+    reviews,
   } = teacher;
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const detailsId = useId();
+  const bookingId = useId();
 
   const fullName = `${name} ${surname}`;
   const highlightedLevel = activeLevel ?? levels[0];
@@ -86,9 +94,60 @@ function TeacherCard({
           </p>
         </div>
 
-        <button type="button" className={styles.readMore} onClick={onReadMore}>
-          Read more
+        <button
+          type="button"
+          className={styles.readMore}
+          aria-expanded={isExpanded}
+          aria-controls={`${detailsId} ${bookingId}`}
+          onClick={() => setIsExpanded((expanded) => !expanded)}
+        >
+          {isExpanded ? 'Read less' : 'Read more'}
         </button>
+
+        <div
+          id={detailsId}
+          className={styles.expandable}
+          data-expanded={isExpanded}
+        >
+          <div className={styles.expanded}>
+            <p className={styles.experience}>{experience}</p>
+
+            {reviews.length > 0 && (
+              <ul className={styles.reviews}>
+                {reviews.map(
+                  ({ reviewer_name, reviewer_rating, comment }, index) => (
+                    <li
+                      key={`${reviewer_name}-${index}`}
+                      className={styles.review}
+                    >
+                      <div className={styles.reviewer}>
+                        <span
+                          className={styles.reviewerAvatar}
+                          aria-hidden="true"
+                        >
+                          {reviewer_name.charAt(0)}
+                        </span>
+                        <div>
+                          <p className={styles.reviewerName}>{reviewer_name}</p>
+                          <p className={styles.reviewerRating}>
+                            <Icon
+                              name="star"
+                              size={16}
+                              className={styles.star}
+                              label="Rating"
+                            />
+                            {reviewer_rating.toFixed(1)}
+                          </p>
+                        </div>
+                      </div>
+                      <p>{comment}</p>
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
+          </div>
+        </div>
 
         <ul className={styles.levels}>
           {levels.map((level) => (
@@ -105,6 +164,18 @@ function TeacherCard({
             </li>
           ))}
         </ul>
+
+        <div
+          id={bookingId}
+          className={styles.expandable}
+          data-expanded={isExpanded}
+        >
+          <div className={styles.booking}>
+            <Button className={styles.book} onClick={onBookTrial}>
+              Book trial lesson
+            </Button>
+          </div>
+        </div>
       </div>
     </article>
   );
