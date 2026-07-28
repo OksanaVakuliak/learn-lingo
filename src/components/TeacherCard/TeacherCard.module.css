@@ -130,6 +130,60 @@
   opacity: 0.7;
 }
 
+.expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.expanded[hidden] {
+  display: none;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewerAvatar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-weight: 500;
+  color: var(--color-white);
+  background-color: var(--color-text-muted);
+  border-radius: 50%;
+}
+
+.reviewerName {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.reviewerRating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
 .levels {
   display: flex;
   flex-wrap: wrap;
@@ -199,6 +253,10 @@
   }
 
   .details {
+    margin-top: 32px;
+  }
+
+  .expanded {
     margin-top: 32px;
   }
 
