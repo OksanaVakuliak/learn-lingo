@@ -103,43 +103,49 @@ function TeacherCard({
           {isExpanded ? 'Read less' : 'Read more'}
         </button>
 
-        <div id={detailsId} className={styles.expanded} hidden={!isExpanded}>
-          <p>{experience}</p>
+        <div
+          id={detailsId}
+          className={styles.expandable}
+          data-expanded={isExpanded}
+        >
+          <div className={styles.expanded}>
+            <p className={styles.experience}>{experience}</p>
 
-          {reviews.length > 0 && (
-            <ul className={styles.reviews}>
-              {reviews.map(
-                ({ reviewer_name, reviewer_rating, comment }, index) => (
-                  <li
-                    key={`${reviewer_name}-${index}`}
-                    className={styles.review}
-                  >
-                    <div className={styles.reviewer}>
-                      <span
-                        className={styles.reviewerAvatar}
-                        aria-hidden="true"
-                      >
-                        {reviewer_name.charAt(0)}
-                      </span>
-                      <div>
-                        <p className={styles.reviewerName}>{reviewer_name}</p>
-                        <p className={styles.reviewerRating}>
-                          <Icon
-                            name="star"
-                            size={16}
-                            className={styles.star}
-                            label="Rating"
-                          />
-                          {reviewer_rating}
-                        </p>
+            {reviews.length > 0 && (
+              <ul className={styles.reviews}>
+                {reviews.map(
+                  ({ reviewer_name, reviewer_rating, comment }, index) => (
+                    <li
+                      key={`${reviewer_name}-${index}`}
+                      className={styles.review}
+                    >
+                      <div className={styles.reviewer}>
+                        <span
+                          className={styles.reviewerAvatar}
+                          aria-hidden="true"
+                        >
+                          {reviewer_name.charAt(0)}
+                        </span>
+                        <div>
+                          <p className={styles.reviewerName}>{reviewer_name}</p>
+                          <p className={styles.reviewerRating}>
+                            <Icon
+                              name="star"
+                              size={16}
+                              className={styles.star}
+                              label="Rating"
+                            />
+                            {reviewer_rating}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <p>{comment}</p>
-                  </li>
-                )
-              )}
-            </ul>
-          )}
+                      <p>{comment}</p>
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
+          </div>
         </div>
 
         <ul className={styles.levels}>
@@ -158,11 +164,13 @@ function TeacherCard({
           ))}
         </ul>
 
-        {isExpanded && (
-          <Button className={styles.book} onClick={onBookTrial}>
-            Book trial lesson
-          </Button>
-        )}
+        <div className={styles.expandable} data-expanded={isExpanded}>
+          <div className={styles.booking}>
+            <Button className={styles.book} onClick={onBookTrial}>
+              Book trial lesson
+            </Button>
+          </div>
+        </div>
       </div>
     </article>
   );
