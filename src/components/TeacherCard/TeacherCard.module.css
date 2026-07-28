@@ -191,6 +191,13 @@
   margin-top: 24px;
 }
 
+.book {
+  --button-padding-x: 48px;
+
+  align-self: stretch;
+  margin-top: 24px;
+}
+
 .level {
   padding: 8px 12px;
   font-size: 14px;
@@ -218,6 +225,10 @@
 
   .header {
     padding-right: 50px;
+  }
+
+  .book {
+    align-self: flex-start;
   }
 }
 
@@ -261,6 +272,10 @@
   }
 
   .levels {
+    margin-top: 32px;
+  }
+
+  .book {
     margin-top: 32px;
   }
 }

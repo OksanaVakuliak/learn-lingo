@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import styles from './TeacherCard.module.css';
 
@@ -7,6 +8,7 @@ function TeacherCard({
   isFavorite = false,
   activeLevel,
   onToggleFavorite,
+  onBookTrial,
 }) {
   const {
     name,
@@ -155,6 +157,12 @@ function TeacherCard({
             </li>
           ))}
         </ul>
+
+        {isExpanded && (
+          <Button className={styles.book} onClick={onBookTrial}>
+            Book trial lesson
+          </Button>
+        )}
       </div>
     </article>
   );
