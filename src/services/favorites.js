@@ -25,5 +25,9 @@ export function writeFavorites(uid, ids) {
     return;
   }
 
-  localStorage.setItem(storageKey(uid), JSON.stringify(ids));
+  try {
+    localStorage.setItem(storageKey(uid), JSON.stringify(ids));
+  } catch {
+    // Keep the current in-memory favorites when persistence is unavailable.
+  }
 }
