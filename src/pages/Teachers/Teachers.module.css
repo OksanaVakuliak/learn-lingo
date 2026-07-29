@@ -13,11 +13,6 @@
   clip-path: inset(50%);
 }
 
-.list {
-  display: grid;
-  gap: 24px;
-}
-
 .status {
   margin-top: 24px;
   text-align: center;
@@ -43,10 +38,6 @@
 @media (min-width: 768px) {
   .section {
     padding: 48px 0;
-  }
-
-  .list {
-    gap: 32px;
   }
 
   .action {

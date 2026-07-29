@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import Loader from '../../components/Loader/Loader';
 import Modal from '../../components/Modal/Modal';
-import TeacherCard from '../../components/TeacherCard/TeacherCard';
+import TeacherList from '../../components/TeacherList/TeacherList';
 import useAuth from '../../hooks/useAuth';
 import useFavorites from '../../hooks/useFavorites';
 import { getTeachersPage } from '../../services/teachers';
@@ -93,17 +93,11 @@ function Teachers() {
           <h1 className={styles.title}>Teachers</h1>
 
           {teachers.length > 0 && (
-            <ul className={styles.list}>
-              {teachers.map((teacher) => (
-                <li key={teacher.id}>
-                  <TeacherCard
-                    teacher={teacher}
-                    isFavorite={isFavorite(teacher.id)}
-                    onToggleFavorite={() => handleToggleFavorite(teacher.id)}
-                  />
-                </li>
-              ))}
-            </ul>
+            <TeacherList
+              teachers={teachers}
+              isFavorite={isFavorite}
+              onToggleFavorite={handleToggleFavorite}
+            />
           )}
 
           {isLoading && (
