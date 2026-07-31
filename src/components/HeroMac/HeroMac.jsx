@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import styles from './HeroMac.module.css';
 
 function HeroMac({ className }) {
   const rawId = useId();
@@ -36,8 +37,8 @@ function HeroMac({ className }) {
           y2="247.251"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--hero-mac-from)" />
-          <stop offset="1" stopColor="var(--hero-mac-to)" />
+          <stop className={styles.macFrom} />
+          <stop offset="1" className={styles.macTo} />
         </linearGradient>
         <linearGradient
           id={appleId}
@@ -47,8 +48,8 @@ function HeroMac({ className }) {
           y2="121.053"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--accent-light)" />
-          <stop offset="1" stopColor="var(--hero-apple-to)" />
+          <stop className={styles.appleFrom} />
+          <stop offset="1" className={styles.appleTo} />
         </linearGradient>
       </defs>
     </svg>

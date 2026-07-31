@@ -1,0 +1,15 @@
+.macFrom {
+  stop-color: var(--hero-mac-from);
+}
+
+.macTo {
+  stop-color: var(--hero-mac-to);
+}
+
+.appleFrom {
+  stop-color: var(--accent-light);
+}
+
+.appleTo {
+  stop-color: var(--hero-apple-to);
+}
