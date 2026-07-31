@@ -2,7 +2,11 @@ import styles from './Container.module.css';
 
 function Container({ children, className }) {
   return (
-    <div className={className ? `${styles.container} ${className}` : styles.container}>
+    <div
+      className={
+        className ? `${styles.container} ${className}` : styles.container
+      }
+    >
       {children}
     </div>
   );
