@@ -1,20 +1,29 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import Loader from '../../components/Loader/Loader';
 import Modal from '../../components/Modal/Modal';
+import TeacherFilters from '../../components/TeacherFilters/TeacherFilters';
 import TeacherList from '../../components/TeacherList/TeacherList';
 import useAuth from '../../hooks/useAuth';
 import useFavorites from '../../hooks/useFavorites';
-import { getTeachersPage } from '../../services/teachers';
+import { getTeachers } from '../../services/teachers';
+import {
+  EMPTY_FILTERS,
+  buildFilterOptions,
+  filterTeachers,
+} from '../../utils/teacherFilters';
 import styles from './Teachers.module.css';
+
+const PAGE_SIZE = 4;
 
 function Teachers() {
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [teachers, setTeachers] = useState([]);
-  const [nextKey, setNextKey] = useState(null);
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isLoginRequired, setIsLoginRequired] = useState(false);
@@ -31,60 +40,55 @@ function Teachers() {
     toggleFavorite(teacherId);
   };
 
-  useEffect(() => {
-    let active = true;
-    isMounted.current = true;
-
-    getTeachersPage()
-      .then((page) => {
-        if (!active) {
-          return;
+  const load = useCallback(() => {
+    getTeachers()
+      .then((loaded) => {
+        if (isMounted.current) {
+          setTeachers(loaded);
         }
-
-        setTeachers(page.teachers);
-        setNextKey(page.nextKey);
       })
       .catch((loadError) => {
-        if (active) {
+        if (isMounted.current) {
           setError(loadError);
         }
       })
       .finally(() => {
-        if (active) {
+        if (isMounted.current) {
           setIsLoading(false);
         }
       });
-
-    return () => {
-      active = false;
-      isMounted.current = false;
-    };
   }, []);
 
-  const handleLoadMore = () => {
+  useEffect(() => {
+    isMounted.current = true;
+    load();
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [load]);
+
+  const handleRetry = () => {
     setIsLoading(true);
     setError(null);
-
-    getTeachersPage(nextKey)
-      .then((page) => {
-        if (!isMounted.current) {
-          return;
-        }
-
-        setTeachers((loaded) => [...loaded, ...page.teachers]);
-        setNextKey(page.nextKey);
-      })
-      .catch((loadError) => {
-        if (isMounted.current) {
-          setError(loadError);
-        }
-      })
-      .finally(() => {
-        if (isMounted.current) {
-          setIsLoading(false);
-        }
-      });
+    load();
   };
+
+  const handleFilterChange = (name, value) => {
+    setFilters((current) => ({ ...current, [name]: value }));
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const options = useMemo(() => buildFilterOptions(teachers), [teachers]);
+
+  const matching = useMemo(
+    () => filterTeachers(teachers, filters),
+    [teachers, filters]
+  );
+
+  const visible = matching.slice(0, visibleCount);
+  const hasMore = visibleCount < matching.length;
+  const isFiltered = Object.values(filters).some(Boolean);
 
   return (
     <section className={styles.section}>
@@ -93,41 +97,44 @@ function Teachers() {
           <h1 className={styles.title}>Teachers</h1>
 
           {teachers.length > 0 && (
+            <TeacherFilters
+              filters={filters}
+              options={options}
+              onChange={handleFilterChange}
+            />
+          )}
+
+          {visible.length > 0 && (
             <TeacherList
-              teachers={teachers}
+              teachers={visible}
+              activeLevel={filters.level}
               isFavorite={isFavorite}
               onToggleFavorite={handleToggleFavorite}
             />
           )}
 
-          {isLoading && (
-            <Loader
-              inline={teachers.length > 0}
-              label={
-                teachers.length === 0
-                  ? 'Loading teachers'
-                  : 'Loading more teachers'
-              }
-            />
-          )}
+          {isLoading && <Loader label="Loading teachers" />}
 
           {error && (
             <div className={styles.error} role="alert">
               <p className={styles.errorMessage}>{error.message}</p>
-              <Button onClick={handleLoadMore} className={styles.action}>
+              <Button onClick={handleRetry} className={styles.action}>
                 Try again
               </Button>
             </div>
           )}
 
-          {!isLoading && !error && teachers.length === 0 && (
-            <p className={styles.status}>No teachers to show yet.</p>
+          {!isLoading && !error && matching.length === 0 && (
+            <p className={styles.status} role="status">
+              {isFiltered
+                ? 'No teachers match the selected filters. Try a different combination.'
+                : 'No teachers to show yet.'}
+            </p>
           )}
 
-          {!error && nextKey && (
+          {hasMore && (
             <Button
-              onClick={handleLoadMore}
-              disabled={isLoading}
+              onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
               className={styles.action}
             >
               Load more
