@@ -1,0 +1,26 @@
+.filters {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .language {
+    width: 221px;
+  }
+
+  .level {
+    width: 198px;
+  }
+
+  .price {
+    width: 152px;
+  }
+}

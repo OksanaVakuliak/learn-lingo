@@ -1,0 +1,55 @@
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-text-muted);
+}
+
+.control {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  appearance: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--color-text);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .select {
+    padding: 16px 48px 16px 18px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .icon {
+    right: 18px;
+  }
+}
