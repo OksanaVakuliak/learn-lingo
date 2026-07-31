@@ -1,9 +1,5 @@
 import { object, string } from 'yup';
-
-const email = string()
-  .trim()
-  .required('Email is required')
-  .email('Please enter a valid email address');
+import { email, name } from './fieldSchemas';
 
 const password = string()
   .required('Password is required')
@@ -11,8 +7,4 @@ const password = string()
 
 export const loginSchema = object({ email, password });
 
-export const registrationSchema = object({
-  name: string().trim().required('Name is required'),
-  email,
-  password,
-});
+export const registrationSchema = object({ name, email, password });
