@@ -41,7 +41,7 @@
 
   --container-max: 1440px;
   --container-padding: 20px;
-  --menu-breakpoint: 768px;
+  --menu-breakpoint: 1280px;
 }
 
 @media (min-width: 768px) {

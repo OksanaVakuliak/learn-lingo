@@ -1,5 +1,6 @@
 .button {
   font-weight: 700;
+  white-space: nowrap;
   border-radius: var(--radius-md);
   transition:
     background-color 0.25s ease,
