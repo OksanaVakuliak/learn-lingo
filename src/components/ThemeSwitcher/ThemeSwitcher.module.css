@@ -53,7 +53,7 @@
   --swatch-color: var(--color-salmon);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .switcher {
     gap: 0;
   }
