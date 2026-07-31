@@ -30,7 +30,7 @@ function TeacherCard({
   const bookingId = useId();
 
   const fullName = `${name} ${surname}`;
-  const highlightedLevel = activeLevel ?? levels[0];
+  const highlightedLevel = activeLevel || levels[0];
 
   return (
     <article className={styles.card}>
