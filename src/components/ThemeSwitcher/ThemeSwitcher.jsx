@@ -9,7 +9,7 @@ function ThemeSwitcher({ className }) {
     <div
       className={[styles.switcher, className].filter(Boolean).join(' ')}
       role="group"
-      aria-label="Colour theme"
+      aria-label="Color theme"
     >
       {THEMES.map(({ id, label }) => (
         <button

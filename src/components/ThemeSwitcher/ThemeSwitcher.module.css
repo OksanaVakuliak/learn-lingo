@@ -1,44 +1,70 @@
 .switcher {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .swatch {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.swatch::before {
+  content: '';
   width: 24px;
   height: 24px;
+  padding: 2px;
   border: 2px solid transparent;
   border-radius: 50%;
+  background-color: var(--swatch-color);
   background-clip: content-box;
-  padding: 2px;
   transition:
     border-color 0.25s ease,
     transform 0.25s ease;
 }
 
-.swatch:hover {
+.swatch:hover::before {
   transform: scale(1.1);
 }
 
-.swatch[aria-pressed='true'] {
+.swatch[aria-pressed='true']::before {
   border-color: var(--color-text);
 }
 
 .swatch[data-color='yellow'] {
-  background-color: var(--color-yellow);
+  --swatch-color: var(--color-yellow);
 }
 
 .swatch[data-color='green'] {
-  background-color: var(--color-green);
+  --swatch-color: var(--color-green);
 }
 
 .swatch[data-color='blue'] {
-  background-color: var(--color-blue);
+  --swatch-color: var(--color-blue);
 }
 
 .swatch[data-color='rose'] {
-  background-color: var(--color-rose);
+  --swatch-color: var(--color-rose);
 }
 
 .swatch[data-color='salmon'] {
-  background-color: var(--color-salmon);
+  --swatch-color: var(--color-salmon);
+}
+
+@media (min-width: 768px) {
+  .switcher {
+    gap: 0;
+  }
+
+  .swatch {
+    width: 24px;
+    height: 24px;
+  }
+
+  .swatch::before {
+    width: 20px;
+    height: 20px;
+  }
 }
