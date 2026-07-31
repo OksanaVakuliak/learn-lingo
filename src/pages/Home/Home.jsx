@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Container from '../../components/Container/Container';
 import Button from '../../components/Button/Button';
 import Highlight from '../../components/Highlight/Highlight';
+import HeroMac from '../../components/HeroMac/HeroMac';
 import styles from './Home.module.css';
 
 const STATS = [
@@ -41,13 +42,7 @@ function Home() {
               width={339}
               height={339}
             />
-            <img
-              className={styles.mac}
-              src={`${import.meta.env.BASE_URL}hero-mac.svg`}
-              alt=""
-              width={391}
-              height={176}
-            />
+            <HeroMac className={styles.mac} />
           </div>
         </Container>
       </section>
@@ -56,7 +51,11 @@ function Home() {
         <Container>
           <div className={styles.stats}>
             <svg className={styles.frame} aria-hidden="true" focusable="false">
-              <rect className={styles.frameOutline} width="100%" height="100%" />
+              <rect
+                className={styles.frameOutline}
+                width="100%"
+                height="100%"
+              />
             </svg>
 
             <ul className={styles.list}>

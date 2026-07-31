@@ -28,6 +28,10 @@
   --accent: var(--color-yellow);
   --accent-light: var(--color-yellow-light);
 
+  --hero-mac-from: #eeb055;
+  --hero-mac-to: #d08f38;
+  --hero-apple-to: #e7c885;
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-input: 14px;
@@ -55,19 +59,35 @@
 :root[data-theme='green'] {
   --accent: var(--color-green);
   --accent-light: var(--color-green-light);
+
+  --hero-mac-from: #295761;
+  --hero-mac-to: #183e49;
+  --hero-apple-to: #9eb9ad;
 }
 
 :root[data-theme='blue'] {
   --accent: var(--color-blue);
   --accent-light: var(--color-blue-light);
+
+  --hero-mac-from: #314b6e;
+  --hero-mac-to: #1f385a;
+  --hero-apple-to: #9fb6cd;
 }
 
 :root[data-theme='rose'] {
   --accent: var(--color-rose);
   --accent-light: var(--color-rose-light);
+
+  --hero-mac-from: #b03f3e;
+  --hero-mac-to: #982a27;
+  --hero-apple-to: #dfa299;
 }
 
 :root[data-theme='salmon'] {
   --accent: var(--color-salmon);
   --accent-light: var(--color-salmon-light);
+
+  --hero-mac-from: #e17650;
+  --hero-mac-to: #ca5b38;
+  --hero-apple-to: #efa98c;
 }
