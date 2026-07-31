@@ -18,5 +18,10 @@ export const bookingSchema = object({
   phone: string()
     .trim()
     .required('Phone number is required')
-    .matches(/^\+?[\d\s()-]{7,20}$/, 'Please enter a valid phone number'),
+    .matches(/^\+?[\d\s()-]{7,20}$/, 'Please enter a valid phone number')
+    .test(
+      'phone-digits',
+      'Please enter a valid phone number',
+      (value) => (value ?? '').replace(/\D/g, '').length >= 7
+    ),
 });
