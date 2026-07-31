@@ -1,0 +1,60 @@
+.section {
+  padding: 32px 0;
+  background-color: var(--color-bg-light);
+}
+
+.title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.status {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.error {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.errorMessage {
+  color: var(--color-error);
+}
+
+.action {
+  --button-padding-x: 48px;
+
+  display: block;
+  margin: 24px auto 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .action {
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section {
+    padding: 96px 0;
+  }
+
+  .content {
+    padding: 0 64px;
+  }
+
+  .action {
+    margin-top: 64px;
+  }
+}

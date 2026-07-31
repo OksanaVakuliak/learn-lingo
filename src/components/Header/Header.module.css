@@ -1,0 +1,222 @@
+.header {
+  position: relative;
+  z-index: 7;
+  padding: 16px 0;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+}
+
+.logo {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+}
+
+.toggle {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  color: var(--color-text);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background-color: var(--color-backdrop);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: min(320px, 85vw);
+  padding: 88px 24px 24px;
+  overflow-y: auto;
+  background-color: var(--color-white);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+.open {
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 0.25s ease,
+    visibility 0s linear 0s;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link {
+  font-size: 18px;
+  line-height: 24px;
+  transition: color 0.25s ease;
+}
+
+.link:hover:not(.active),
+.link:focus-visible:not(.active) {
+  color: var(--color-text-secondary);
+}
+
+.active {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.auth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.themes {
+  align-self: start;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text);
+  transition: color 0.25s ease;
+}
+
+.loginButton:hover,
+.loginButton:focus-visible {
+  color: var(--color-text-secondary);
+}
+
+.loginIcon {
+  color: var(--accent);
+}
+
+.error {
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-error);
+}
+
+.userName {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 20px 0;
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+  }
+
+  .logo {
+    justify-self: start;
+  }
+
+  .toggle,
+  .backdrop {
+    display: none;
+  }
+
+  .menu {
+    position: static;
+    display: contents;
+    width: auto;
+    padding: 0;
+    overflow: visible;
+    background-color: transparent;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    gap: 28px;
+  }
+
+  .link {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .auth {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    justify-self: end;
+    min-width: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .themes {
+    align-self: center;
+    margin-right: 4px;
+  }
+
+  .error {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    white-space: nowrap;
+  }
+
+  .userName {
+    max-width: 180px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .themes {
+    flex-basis: 100%;
+    justify-content: flex-end;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .inner {
+    --container-padding: 128px;
+  }
+}

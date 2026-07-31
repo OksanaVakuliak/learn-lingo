@@ -1,0 +1,52 @@
+.dialog {
+  --modal-width: 600px;
+}
+
+.teacher {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.label {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-muted);
+}
+
+.name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.confirmation {
+  margin-top: 24px;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--color-text-secondary);
+}
+
+.action {
+  width: 100%;
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .confirmation {
+    margin-top: 40px;
+  }
+
+  .action {
+    margin-top: 40px;
+  }
+}
