@@ -8,8 +8,8 @@ const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]';
 function isReachable(element) {
   return Boolean(
     element?.isConnected &&
-      element.checkVisibility({ visibilityProperty: true }) &&
-      element.matches(FOCUSABLE)
+    element.checkVisibility({ visibilityProperty: true }) &&
+    element.matches(FOCUSABLE)
   );
 }
 
@@ -25,7 +25,14 @@ function findReturnTarget(trigger, fallback) {
   return [fallback, ...fallback.querySelectorAll(FOCUSABLE)].find(isReachable);
 }
 
-function Modal({ title, description, onClose, returnFocusRef, children }) {
+function Modal({
+  title,
+  description,
+  className,
+  onClose,
+  returnFocusRef,
+  children,
+}) {
   const titleId = useId();
   const dialogRef = useRef(null);
   const backdropPressed = useRef(false);
@@ -82,7 +89,7 @@ function Modal({ title, description, onClose, returnFocusRef, children }) {
     >
       <div
         ref={dialogRef}
-        className={styles.modal}
+        className={[styles.modal, className].filter(Boolean).join(' ')}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
