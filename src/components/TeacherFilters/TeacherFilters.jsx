@@ -29,8 +29,8 @@ function TeacherFilters({ filters, options, onChange }) {
       />
 
       <Select
-        label="Price / 1 hour"
-        placeholder="Any price"
+        label="Price"
+        placeholder="Any"
         className={styles.price}
         value={filters.price}
         options={toOptions(options.prices, (price) => `${price} $`)}

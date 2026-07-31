@@ -26,6 +26,7 @@
   border: none;
   border-radius: var(--radius-input);
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .select:focus-visible {
@@ -44,7 +45,7 @@
 
 @media (min-width: 768px) {
   .select {
-    padding: 16px 48px 16px 18px;
+    padding: 14px 48px 14px 18px;
     font-size: 18px;
     line-height: 20px;
   }
