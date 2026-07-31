@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { readTheme, writeTheme } from '../services/theme';
 import { ThemeContext } from './ThemeContext';
 
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(readTheme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
