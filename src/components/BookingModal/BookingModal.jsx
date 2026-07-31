@@ -1,19 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../Button/Button';
 import BookingForm from '../BookingForm/BookingForm';
 import Modal from '../Modal/Modal';
 import styles from './BookingModal.module.css';
 
+const INTRO =
+  'Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs.';
+
 function BookingModal({ teacher, onClose }) {
   const [booking, setBooking] = useState(null);
+  const confirmationRef = useRef(null);
 
   const fullName = `${teacher.name} ${teacher.surname}`;
+
+  useEffect(() => {
+    confirmationRef.current?.focus();
+  }, [booking]);
 
   return (
     <Modal
       className={styles.dialog}
       title="Book trial lesson"
-      description="Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs."
+      description={booking ? undefined : INTRO}
       onClose={onClose}
     >
       <div className={styles.teacher}>
@@ -32,7 +40,12 @@ function BookingModal({ teacher, onClose }) {
       </div>
 
       {booking ? (
-        <div className={styles.confirmation} role="status">
+        <div
+          ref={confirmationRef}
+          className={styles.confirmation}
+          role="status"
+          tabIndex={-1}
+        >
           <p className={styles.message}>
             Thank you, {booking.name}. Your request for a trial lesson with{' '}
             {fullName} has been sent — the confirmation with the time will come
