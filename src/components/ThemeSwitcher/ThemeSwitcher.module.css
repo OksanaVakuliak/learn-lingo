@@ -1,0 +1,44 @@
+.switcher {
+  display: flex;
+  gap: 8px;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background-clip: content-box;
+  padding: 2px;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.swatch:hover {
+  transform: scale(1.1);
+}
+
+.swatch[aria-pressed='true'] {
+  border-color: var(--color-text);
+}
+
+.swatch[data-color='yellow'] {
+  background-color: var(--color-yellow);
+}
+
+.swatch[data-color='green'] {
+  background-color: var(--color-green);
+}
+
+.swatch[data-color='blue'] {
+  background-color: var(--color-blue);
+}
+
+.swatch[data-color='rose'] {
+  background-color: var(--color-rose);
+}
+
+.swatch[data-color='salmon'] {
+  background-color: var(--color-salmon);
+}

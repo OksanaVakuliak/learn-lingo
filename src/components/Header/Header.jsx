@@ -5,6 +5,7 @@ import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import AuthForm from '../AuthForm/AuthForm';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import useAuth from '../../hooks/useAuth';
 import styles from './Header.module.css';
 
@@ -130,9 +131,7 @@ function Header() {
           <Icon name={isMenuOpen ? 'close' : 'menu'} size={28} />
         </button>
 
-        {isMenuOpen && (
-          <div className={styles.backdrop} onClick={closeMenu} />
-        )}
+        {isMenuOpen && <div className={styles.backdrop} onClick={closeMenu} />}
 
         <div
           id="header-menu"
@@ -162,6 +161,8 @@ function Header() {
           </nav>
 
           <div className={styles.auth} ref={authRef}>
+            <ThemeSwitcher className={styles.themes} />
+
             {!isLoading &&
               (user ? (
                 <>
@@ -184,7 +185,11 @@ function Header() {
                     className={styles.loginButton}
                     onClick={() => openModal('login')}
                   >
-                    <Icon name="log-in" size={20} className={styles.loginIcon} />
+                    <Icon
+                      name="log-in"
+                      size={20}
+                      className={styles.loginIcon}
+                    />
                     Log in
                   </button>
                   <Button variant="dark" onClick={() => openModal('register')}>
