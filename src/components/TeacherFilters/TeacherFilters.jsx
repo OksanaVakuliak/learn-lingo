@@ -5,7 +5,8 @@ function TeacherFilters({ filters, options, onChange }) {
   const toOptions = (values, format) =>
     values.map((value) => ({
       value: String(value),
-      label: format ? format(value) : value,
+      label: String(value),
+      ...(format && { selectedLabel: format(value) }),
     }));
 
   return (
