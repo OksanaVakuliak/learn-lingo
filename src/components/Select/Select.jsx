@@ -24,7 +24,8 @@ function Select({ label, value, options, placeholder, onChange, className }) {
     0
   );
   const selected = items[selectedIndex];
-  const current = activeIndex < 0 ? selectedIndex : activeIndex;
+  const isActive = (index) => index >= 0 && index < items.length;
+  const current = isActive(activeIndex) ? activeIndex : selectedIndex;
 
   useEffect(() => {
     if (!isOpen) {
@@ -61,7 +62,7 @@ function Select({ label, value, options, placeholder, onChange, className }) {
 
   const moveActive = (offset) =>
     setActiveIndex((previous) => {
-      const base = previous < 0 ? selectedIndex : previous;
+      const base = isActive(previous) ? previous : selectedIndex;
 
       return Math.min(Math.max(base + offset, 0), items.length - 1);
     });
