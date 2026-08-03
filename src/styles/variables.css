@@ -32,6 +32,15 @@
   --hero-mac-to: #d08f38;
   --hero-apple-to: #e7c885;
 
+  --scrollbar-size: 8px;
+  --scrollbar-track: rgba(18, 20, 23, 0.05);
+  --scrollbar-thumb: color-mix(in srgb, var(--accent) 65%, var(--color-dark));
+  --scrollbar-thumb-hover: color-mix(
+    in srgb,
+    var(--accent) 50%,
+    var(--color-dark)
+  );
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-input: 14px;
