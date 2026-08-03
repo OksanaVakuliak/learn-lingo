@@ -34,10 +34,10 @@
 
   --scrollbar-size: 8px;
   --scrollbar-track: rgba(18, 20, 23, 0.05);
-  --scrollbar-thumb: var(--accent);
+  --scrollbar-thumb: color-mix(in srgb, var(--accent) 65%, var(--color-dark));
   --scrollbar-thumb-hover: color-mix(
     in srgb,
-    var(--accent) 82%,
+    var(--accent) 50%,
     var(--color-dark)
   );
 
