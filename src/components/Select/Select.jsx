@@ -60,11 +60,11 @@ function Select({ label, value, options, placeholder, onChange, className }) {
   };
 
   const moveActive = (offset) =>
-    setActiveIndex(
-      activeIndex < 0
-        ? selectedIndex
-        : Math.min(Math.max(activeIndex + offset, 0), items.length - 1)
-    );
+    setActiveIndex((previous) => {
+      const base = previous < 0 ? selectedIndex : previous;
+
+      return Math.min(Math.max(base + offset, 0), items.length - 1);
+    });
 
   const handleKeyDown = (event) => {
     if (!isOpen) {
