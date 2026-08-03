@@ -79,7 +79,13 @@ function Select({ label, value, options, placeholder, onChange, className }) {
 
     switch (event.key) {
       case 'Escape':
+        setIsOpen(false);
+        break;
       case 'Tab':
+        if (items[current].value !== value) {
+          onChange(items[current].value);
+        }
+
         setIsOpen(false);
         break;
       case 'Enter':
